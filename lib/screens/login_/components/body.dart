@@ -26,7 +26,7 @@ class Body extends StatelessWidget {
               height: size.height * 0.03,
             ),
             Image.asset(
-              "images/house.png",
+              "images/signup.png",
               width: size.width * 0.35,
             ),
             SizedBox(

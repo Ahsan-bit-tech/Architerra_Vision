@@ -54,10 +54,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - images/house.png
-    - images/a1.png
     - images/Logo.png
-    # - images/a_dot_ham.jpeg
+    - images/Logo.png
+    - images/logo1.png
+    - images/a1.png
+    - images/signup.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
               height: size.height * 0.03,
             ),
             Image.asset(
-              "images/house.png",
+              "images/Logo.png",
               width: size.width * 0.35,
             ),
             SizedBox(
@@ -158,7 +158,7 @@ class Body extends StatelessWidget {
                         border: Border.all(width: 2, color: kPrimaryLightColor),
                         shape: BoxShape.circle),
                     child: Image.asset(
-                      "images/house.png",
+                      "images/Logo.png",
                       height: 20,
                       width: 20,
                     ),
@@ -173,7 +173,7 @@ class Body extends StatelessWidget {
                         border: Border.all(width: 2, color: kPrimaryLightColor),
                         shape: BoxShape.circle),
                     child: Image.asset(
-                      "images/house.png",
+                      "images/Logo.png",
                       height: 20,
                       width: 20,
                     ),
@@ -188,7 +188,7 @@ class Body extends StatelessWidget {
                         border: Border.all(width: 2, color: kPrimaryLightColor),
                         shape: BoxShape.circle),
                     child: Image.asset(
-                      "images/house.png",
+                      "images/Logo.png",
                       height: 20,
                       width: 20,
                     ),

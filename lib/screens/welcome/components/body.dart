@@ -16,11 +16,11 @@ class Body extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "welcome to Architerra Vision ",
+              "welcome ",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Image.asset(
-              "images/house.png",
+              "images/Logo.png",
               width: size.width * 0.3,
             ),
             SizedBox(
@@ -64,7 +64,7 @@ class Body extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                       backgroundColor: kPrimaryLightColor,
-                      foregroundColor: Colors.purple),
+                      foregroundColor: const Color.fromARGB(255, 6, 181, 181)),
                   onPressed: () {
                     Navigator.push(
                       context,
