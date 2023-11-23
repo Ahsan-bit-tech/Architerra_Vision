@@ -79,30 +79,36 @@ class _bodyState extends State<body> {
                     color: kPrimaryLightColor,
                     borderRadius: BorderRadius.circular(29)),
                 child: TextFormField(
-                  controller: PassController,
-                  obscureText: passtoggle,
-                  decoration: InputDecoration(
-                    hintText: "Password",
-                    icon: Icon(
-                      Icons.lock,
-                      color: kPrimaryColor,
+                    controller: PassController,
+                    obscureText: passtoggle,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      icon: Icon(
+                        Icons.lock,
+                        color: kPrimaryColor,
+                      ),
+                      suffix: InkWell(
+                        onTap: () {
+                          setState(() {
+                            passtoggle = !passtoggle;
+                          });
+                        },
+                        child: Icon(passtoggle
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                      ),
+                      // suffix: Icon(
+                      //   Icons.visibility,
+                      //   color: kPrimaryColor,
+                      // ),
+                      border: InputBorder.none,
                     ),
-                    suffix: InkWell(
-                      onTap: () {
-                        setState(() {
-                          passtoggle = !passtoggle;
-                        });
-                      },
-                      child: Icon(
-                          passtoggle ? Icons.visibility : Icons.visibility_off),
-                    ),
-                    // suffix: Icon(
-                    //   Icons.visibility,
-                    //   color: kPrimaryColor,
-                    // ),
-                    border: InputBorder.none,
-                  ),
-                ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password can't be empty";
+                      }
+                      return null;
+                    }),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),

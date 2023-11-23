@@ -29,19 +29,49 @@ class _BodyState extends State<Body> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "SIGN UP",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    " Create an Account",
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontStyle: FontStyle.italic,
+                        // color: Colors.lightGreen,
+                        fontSize: 20),
+                  ),
+                ],
               ),
+
               SizedBox(
                 height: size.height * 0.03,
               ),
-              Image.asset(
-                "images/Logo.png",
-                width: size.width * 0.35,
-              ),
-              SizedBox(
-                height: size.height * 0.03,
+              // Image.asset(
+              //   "images/Logo.png",
+              //   width: size.width * 0.35,
+              // ),
+              // SizedBox(
+              //   height: size.height * 0.03,
+              // ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                    color: Color(0xFFE0F2F1),
+                    borderRadius: BorderRadius.circular(29)),
+                child: TextFormField(
+                  cursorColor: kPrimaryColor,
+                  // controller: PassController,
+                  // obscureText: passtoggle,
+                  decoration: const InputDecoration(
+                    hintText: "Name",
+                    icon: Icon(
+                      Icons.person,
+                      color: kPrimaryColor,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
@@ -52,10 +82,11 @@ class _BodyState extends State<Body> {
                 ),
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
+                  cursorColor: kPrimaryColor,
                   controller: emailController,
                   decoration: const InputDecoration(
                     icon: Icon(
-                      Icons.person,
+                      Icons.email,
                       color: kPrimaryColor,
                     ),
                     hintText: "Your Email",
@@ -90,20 +121,62 @@ class _BodyState extends State<Body> {
                     ),
                     suffix: InkWell(
                       onTap: () {
-                        setState(() {
-                          passtoggle = !passtoggle;
-                        });
+                        setState(
+                          () {
+                            passtoggle = !passtoggle;
+                          },
+                        );
                       },
                       child: Icon(
                           passtoggle ? Icons.visibility : Icons.visibility_off),
                     ),
-                    // suffix: Icon(
-                    //   Icons.visibility,
-                    //   color: kPrimaryColor,
-                    // ),
                     border: InputBorder.none,
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Password can't be empty";
+                    }
+                    return null;
+                  },
                 ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                decoration: BoxDecoration(
+                    color: kPrimaryLightColor,
+                    borderRadius: BorderRadius.circular(29)),
+                child: TextFormField(
+                    // controller: PassController,
+                    obscureText: passtoggle,
+                    decoration: InputDecoration(
+                      hintText: "Confirm Password",
+                      icon: const Icon(
+                        Icons.lock,
+                        color: kPrimaryColor,
+                      ),
+                      suffix: InkWell(
+                        onTap: () {
+                          setState(() {
+                            passtoggle = !passtoggle;
+                          });
+                        },
+                        child: Icon(passtoggle
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                      ),
+                      // suffix: Icon(
+                      //   Icons.visibility,
+                      //   color: kPrimaryColor,
+                      // ),
+                      border: InputBorder.none,
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password can't be empty";
+                      }
+                      return null;
+                    }),
               ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
@@ -146,7 +219,7 @@ class _BodyState extends State<Body> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     "Already have an Account ? ",
                     style: TextStyle(color: kPrimaryColor),
                   ),
@@ -161,7 +234,7 @@ class _BodyState extends State<Body> {
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "LOGIN ",
                         style: TextStyle(
                             color: kPrimaryColor, fontWeight: FontWeight.bold),

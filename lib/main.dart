@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/constants.dart';
+// import 'package:flutter_login/screens/welcome/welcome_screen.dart';
+import 'package:flutter_login/screens/BluePrints/components/sidebar.dart';
+import 'package:flutter_login/screens/main_screen/input_screen.dart';
 import 'package:flutter_login/screens/welcome/welcome_screen.dart';
 
 void main() {
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WelcomeScreen(),
+      home: Input_Screen(),
     );
   }
 }
