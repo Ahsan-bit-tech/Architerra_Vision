@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_login/constants.dart';
+import 'package:flutter_login/reusable_widgets/reusable_widgets.dart';
+import 'package:flutter_login/screens/BluePrints/blueprints.dart';
 import 'package:flutter_login/screens/login_/components/background.dart';
 import 'package:flutter_login/screens/signup_/signup_screen.dart';
 import 'package:flutter_login/screens/main_screen/input_screen.dart';
@@ -82,7 +85,7 @@ class _bodyState extends State<body> {
                     controller: PassController,
                     obscureText: passtoggle,
                     decoration: InputDecoration(
-                      hintText: "Password",
+                      hintText: "Your Password",
                       icon: Icon(
                         Icons.lock,
                         color: kPrimaryColor,
@@ -110,41 +113,23 @@ class _bodyState extends State<body> {
                       return null;
                     }),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                width: size.width * 0.8,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(29),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                      backgroundColor: kPrimaryColor,
-                      foregroundColor: Colors.white,
-                    ),
-                    onPressed: () {
-                      if (_formfield.currentState!.validate()) {
-                        // Email is valid, perform login logic
-                        print("Success");
-                        emailController.clear();
-                        PassController.clear();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const Input_Screen();
-                            },
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text(
-                      "LOGIN",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+              firebaseUIButton(context, "Login In", ()
+              {
+                if (_formfield.currentState!.validate())
+                {
+                  // Email is valid, perform login logic
+                  FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text,
+                      password: PassController.text).then((value) {Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Input_Screen()));
+                  }).onError((error, stackTrace) {print("Error ${error.toString()}");
+                  });
+                  print("Success");
+                  emailController.clear();
+                  PassController.clear();
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) {return const Input_Screen();},),);
+                }
+
+              }),
               SizedBox(
                 height: size.height * 0.03,
               ),

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_login/constants.dart';
+import 'package:flutter_login/reusable_widgets/reusable_widgets.dart';
 import 'package:flutter_login/screens/signup_/components/background.dart';
 import 'package:flutter_login/screens/login_/login_screen.dart';
 import 'package:flutter_login/screens/main_screen/input_screen.dart';
@@ -89,7 +91,7 @@ class _BodyState extends State<Body> {
                       Icons.email,
                       color: kPrimaryColor,
                     ),
-                    hintText: "Your Email",
+                    hintText: "Email",
                     border: InputBorder.none,
                   ),
                   validator: (value) {
@@ -178,6 +180,7 @@ class _BodyState extends State<Body> {
                       return null;
                     }),
               ),
+
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 width: size.width * 0.8,
@@ -190,20 +193,19 @@ class _BodyState extends State<Body> {
                       backgroundColor: kPrimaryColor,
                       foregroundColor: Colors.white,
                     ),
-                    onPressed: () {
-                      if (_formfield.currentState!.validate()) {
+
+                    onPressed: ()
+                    {
+                      if (_formfield.currentState!.validate())
+                      {
                         // Email is valid, perform login logic
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: emailController.text, password: PassController.text).then(
+                                (value) { print("New Account Created");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                            }).onError((error, stackTrace) { print("Error ${error.toString()}");
+                        });
                         print("Success");
-                        emailController.clear();
-                        PassController.clear();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return const Input_Screen();
-                            },
-                          ),
-                        );
                       }
                     },
                     child: const Text(
