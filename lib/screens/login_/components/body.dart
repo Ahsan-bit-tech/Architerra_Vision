@@ -113,7 +113,7 @@ class _bodyState extends State<body> {
                       return null;
                     }),
               ),
-              firebaseUIButton(context, "Login In", ()
+              firebaseUIButton(context, "LOGIN", ()
               {
                 if (_formfield.currentState!.validate())
                 {
@@ -121,13 +121,24 @@ class _bodyState extends State<body> {
                   FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text,
                       password: PassController.text).then((value) {Navigator.push(
                       context, MaterialPageRoute(builder: (context) => Input_Screen()));
-                  }).onError((error, stackTrace) {print("Error ${error.toString()}");
+                  }).onError((error, stackTrace) {
+
+                    showDialog(context: context, builder: (context){
+                      return Container(
+                        child: AlertDialog(
+                          title: Text("Incorrect Email or Password"),
+                          actions: [
+                            TextButton(onPressed: () {
+                              Navigator.pop(context);
+                            }, child: Text("OK"))
+                          ],
+                        ),
+                      );
+                    });
+                    print("Error ${error.toString()}");
                   });
                   print("Success");
-                  emailController.clear();
-                  PassController.clear();
-                  //Navigator.push(context, MaterialPageRoute(builder: (context) {return const Input_Screen();},),);
-                }
+                 }
 
               }),
               SizedBox(

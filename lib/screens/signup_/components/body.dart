@@ -200,10 +200,38 @@ class _BodyState extends State<Body> {
                       {
                         // Email is valid, perform login logic
                         FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: emailController.text, password: PassController.text).then(
-                                (value) { print("New Account Created");
+                            email: emailController.text, password: PassController.text).then((value)
+                            {
+                              showDialog(context: context, builder: (context){
+                                return Container(
+                                  child: AlertDialog(
+                                    title: Text("Account Created Successfullly"),
+                                    actions: [
+                                      TextButton(onPressed: () {
+                                        Navigator.pop(context);
+                                      }, child: Text("PROCEED"))
+                                    ],
+                                  ),
+                                );
+                              });
+                              print("New Account Created");
+
                             Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-                            }).onError((error, stackTrace) { print("Error ${error.toString()}");
+                            }).onError((error, stackTrace)
+                        {
+                          showDialog(context: context, builder: (context){
+                            return Container(
+                              child: AlertDialog(
+                                title: Text("Error"),
+                                actions: [
+                                  TextButton(onPressed: () {
+                                    Navigator.pop(context);
+                                  }, child: Text("OK"))
+                                ],
+                              ),
+                            );
+                          });
+                              print("Error ${error.toString()}");
                         });
                         print("Success");
                       }

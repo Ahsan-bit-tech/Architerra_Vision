@@ -18,20 +18,6 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
         ),
         onPressed: () {
           onTap();
-         /* if (_formfield.currentState!.validate()) {
-            // Email is valid, perform login logic
-            print("Success");
-            emailController.clear();
-            PassController.clear();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const Input_Screen();
-                },
-              ),
-            );
-          }*/
         },
         child: const Text(
           "LOGIN",
