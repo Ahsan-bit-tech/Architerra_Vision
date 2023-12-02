@@ -32,11 +32,14 @@ dependencies:
     sdk: flutter
 
 
+## -- FIREBASE PACKAGES
+  firebase_core: ^2.23.0
+  firebase_auth: ^4.14.1
+  google_sign_in: ^6.1.6
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.23.0
-  firebase_auth: ^4.14.1
   awesome_dialog: ^3.1.0
   # rive: ^0.10.1
 
@@ -64,6 +67,7 @@ flutter:
     - images/a1.png
     - images/signup.png
     - RivAssets/home.riv
+    - images/google.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

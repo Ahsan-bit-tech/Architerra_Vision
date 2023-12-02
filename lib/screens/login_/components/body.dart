@@ -167,8 +167,11 @@ class _bodyState extends State<body> {
                         style: TextStyle(
                             color: kPrimaryColor, fontWeight: FontWeight.bold),
                       )),
+
                 ],
-              )
+
+              ),
+
             ],
           ),
         ),
