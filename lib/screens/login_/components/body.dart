@@ -5,8 +5,13 @@ import 'package:flutter_login/constants.dart';
 import 'package:flutter_login/reusable_widgets/reusable_widgets.dart';
 import 'package:flutter_login/screens/BluePrints/blueprints.dart';
 import 'package:flutter_login/screens/login_/components/background.dart';
+import 'package:flutter_login/screens/login_/login_screen.dart';
+import 'package:flutter_login/screens/login_/components/reset_password.dart';
 import 'package:flutter_login/screens/signup_/signup_screen.dart';
 import 'package:flutter_login/screens/main_screen/input_screen.dart';
+import 'package:flutter_login/screens/login_/components/reset_password.dart';
+// import 'package:flutter_login/screens/login_/components/reset_password.dart';
+
 
 class body extends StatefulWidget {
   const body({super.key});
@@ -113,6 +118,33 @@ class _bodyState extends State<body> {
                       return null;
                     }),
               ),
+            /* Container(
+               width: MediaQuery.of(context).size.width,
+               height: 35,
+               alignment: Alignment.bottomRight,
+               child: TextButton(
+                child: const Text(
+              "Forgot Password?",
+                style: TextStyle(color: Colors.white70),
+                textAlign: TextAlign.right,
+          ),
+                onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => SignUpScreen())),
+        ),
+      ),*/
+             /*Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  const Text(
+                    "Don't have an Account ? ",
+                    style: TextStyle(color: kPrimaryColor),
+                  ),
+                ],
+              ),*/
+              forgetPassword(context),
+              SizedBox(
+                height: size.height * 0.03,
+              ),
               firebaseUIButton(context, "LOGIN", ()
               {
                 if (_formfield.currentState!.validate())
@@ -139,7 +171,6 @@ class _bodyState extends State<body> {
                   });
                   print("Success");
                  }
-
               }),
               SizedBox(
                 height: size.height * 0.03,
@@ -148,7 +179,7 @@ class _bodyState extends State<body> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    "Don't have an Account ? ",
+                    "Don't have an Account? ",
                     style: TextStyle(color: kPrimaryColor),
                   ),
                   GestureDetector(
@@ -167,27 +198,30 @@ class _bodyState extends State<body> {
                         style: TextStyle(
                             color: kPrimaryColor, fontWeight: FontWeight.bold),
                       )),
-
                 ],
-
               ),
-
             ],
           ),
         ),
       ),
     );
   }
-} 
 
-// class TextFieldContainer extends StatelessWidget {
-//   const TextFieldContainer({
-//     super.key,
-//     Key key
-//     });
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: const Text(
+          "Forgot Password?",
+          style: TextStyle(color: Colors.black),
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => resetPassword())),
+      ),
+    );
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
+}

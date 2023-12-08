@@ -192,7 +192,6 @@ class _BodyState extends State<Body> {
                       backgroundColor: kPrimaryColor,
                       foregroundColor: Colors.white,
                     ),
-
                     onPressed: ()
                     {
                       if (_formfield.currentState!.validate())
@@ -270,8 +269,6 @@ class _BodyState extends State<Body> {
                       )),
                 ],
               ),
-
-
             ],
           ),
         ),
