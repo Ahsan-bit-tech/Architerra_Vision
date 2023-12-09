@@ -6,6 +6,8 @@ import 'package:flutter_login/reusable_widgets/reusable_widgets.dart';
 import 'package:flutter_login/screens/signup_/components/background.dart';
 import 'package:flutter_login/screens/login_/login_screen.dart';
 import 'package:flutter_login/screens/main_screen/input_screen.dart';
+
+import '../../../services/firebase_services.dart';
 // import 'package:flutter_login/screens/signup_/signup_screen.dart';
 
 class Body extends StatefulWidget {
@@ -179,7 +181,6 @@ class _BodyState extends State<Body> {
                       return null;
                     }),
               ),
-
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
                 width: size.width * 0.8,
@@ -203,7 +204,7 @@ class _BodyState extends State<Body> {
                               showDialog(context: context, builder: (context){
                                 return Container(
                                   child: AlertDialog(
-                                    title: Text("Account Created Successfullly"),
+                                    title: Text("Account Created Successfully"),
                                     actions: [
                                       TextButton(onPressed: () {
                                         Navigator.pop(context);
@@ -241,6 +242,86 @@ class _BodyState extends State<Body> {
                   ),
                 ),
               ),
+
+              SizedBox(
+                height: size.height * 0.005,
+              ),
+              Container(
+                width: size.width * 0.8,
+                child: const Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Divider(
+                        color: Color(0XFFD9D9D9),
+                        height: 1.5,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "OR",
+                        style: TextStyle(
+                            color: kPrimaryColor, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+
+                    Expanded(
+                      child: Divider(
+                        color: Color(0XFFD9D9D9),
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const Text(
+                    'Sign up using',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    //Connectivity with gmail sigu up
+                    onTap: () async {
+                      await FirebaseServices().signInWithGoogle();
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Input_Screen()));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          border:
+                          Border.all(width: 2, color: kPrimaryLightColor),
+                          shape: BoxShape.circle),
+                      child: Image.asset(
+                        'images/google.png',
+                        height: 20,
+                        width: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
               SizedBox(
                 height: size.height * 0.03,
               ),

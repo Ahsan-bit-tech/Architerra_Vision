@@ -11,7 +11,6 @@ import 'package:flutter_login/screens/signup_/signup_screen.dart';
 import 'package:flutter_login/screens/main_screen/input_screen.dart';
 import 'package:flutter_login/screens/login_/components/reset_password.dart';
 
-
 class resetPassword extends StatefulWidget {
   const resetPassword({super.key});
   @override
@@ -23,6 +22,8 @@ class _bodyState extends State<resetPassword> {
   final emailController = TextEditingController();
   final PassController = TextEditingController();
   bool passtoggle = true;
+  bool flag1 =false;
+  bool flag2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class _bodyState extends State<resetPassword> {
 
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
+        key: _formfield,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -63,12 +65,17 @@ class _bodyState extends State<resetPassword> {
                   hintText: "Enter your Email",
                   border: InputBorder.none,
                 ),
-                validator: (value) {
-                  if (value!.isEmpty) {
+                validator: (value)
+                {
+                  if (value!.isEmpty)
+                  {
+                    flag1 = true;
                     return "Email can't be empty";
                   } else if (!RegExp(
                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(value)) {
+                      .hasMatch(value))
+                  {
+                    flag2 = true;
                     return "Enter a valid email address";
                   }
                   return null;
@@ -78,45 +85,47 @@ class _bodyState extends State<resetPassword> {
             SizedBox(
               height: size.height * 0.03,
             ),
-            //resetPassword(),
             firebaseUIButton(context, "RESET", ()
             {
               FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text)
-                  .then((value) => Navigator.of(context).pop());
-              print("Success");
-
-              if (_formfield.currentState!.validate())
+                  .then((value) { showDialog(context: context, builder: (context)
               {
-                // Email is valid, perform login logic
-                 FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text)
-                    .then((value) => Navigator.of(context).pop());
-                 print("Sucees");
-                 }
-              else
-              {
-                print("Failure");
-              }
-                /*FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text,
-                    password: PassController.text).then((value) {Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Input_Screen()));
-                }).onError((error, stackTrace) {
-
-                  showDialog(context: context, builder: (context){
-                    return Container(
-                      child: AlertDialog(
-                        title: Text("Incorrect Email or Password"),
-                        actions: [
-                          TextButton(onPressed: () {
-                            Navigator.pop(context);
-                          }, child: Text("OK"))
-                        ],
+                return Container(
+                  child: AlertDialog(
+                    title: Text("Password reset link sent to your email"),
+                    actions: [
+                      TextButton(
+                        onPressed: ()
+                        {
+                          Navigator.pop(context); // Close the current dialog
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                          );
+                        },
+                        child: Text("Login Again"),
                       ),
-                    );
-                  });
-                  print("Error ${error.toString()}");
+                    ],
+                  ),
+                );
+              });
+              }).onError((error, stackTrace) {
+
+                showDialog(context: context, builder: (context){
+                  return Container(
+                    child: AlertDialog(
+                      title: Text("Error! Re-enter your Email Correctly"),
+                      actions: [
+                        TextButton(onPressed: () {
+                          Navigator.pop(context);
+                        }, child: Text("OK"))
+                      ],
+                    ),
+                  );
                 });
-                print("Success");
-                */
+                print("Error ${error.toString()}");
+              });
+              print("Success");
 
             }),
           ],
@@ -124,6 +133,5 @@ class _bodyState extends State<resetPassword> {
       ),
     );
   }
-
 
 }

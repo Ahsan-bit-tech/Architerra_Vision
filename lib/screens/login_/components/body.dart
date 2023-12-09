@@ -118,29 +118,7 @@ class _bodyState extends State<body> {
                       return null;
                     }),
               ),
-            /* Container(
-               width: MediaQuery.of(context).size.width,
-               height: 35,
-               alignment: Alignment.bottomRight,
-               child: TextButton(
-                child: const Text(
-              "Forgot Password?",
-                style: TextStyle(color: Colors.white70),
-                textAlign: TextAlign.right,
-          ),
-                onPressed: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => SignUpScreen())),
-        ),
-      ),*/
-             /*Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  const Text(
-                    "Don't have an Account ? ",
-                    style: TextStyle(color: kPrimaryColor),
-                  ),
-                ],
-              ),*/
+
               forgetPassword(context),
               SizedBox(
                 height: size.height * 0.03,
