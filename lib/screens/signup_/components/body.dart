@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_login/constants.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter_login/reusable_widgets/reusable_widgets.dart';
 import 'package:flutter_login/screens/signup_/components/background.dart';
 import 'package:flutter_login/screens/login_/login_screen.dart';
 import 'package:flutter_login/screens/main_screen/input_screen.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../services/firebase_services.dart';
 // import 'package:flutter_login/screens/signup_/signup_screen.dart';
@@ -19,9 +22,12 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final _formfield = GlobalKey<FormState>();
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final PassController = TextEditingController();
   bool passtoggle = true;
+  //bool isLoading = false;
+  final databaseReference = FirebaseDatabase.instance.ref('User Details');
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +70,7 @@ class _BodyState extends State<Body> {
                     borderRadius: BorderRadius.circular(29)),
                 child: TextFormField(
                   cursorColor: kPrimaryColor,
-                  // controller: PassController,
-                  // obscureText: passtoggle,
+                  controller : nameController,
                   decoration: const InputDecoration(
                     hintText: "Name",
                     icon: Icon(
@@ -186,7 +191,9 @@ class _BodyState extends State<Body> {
                 width: size.width * 0.8,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(29),
+
                   child: TextButton(
+
                     style: TextButton.styleFrom(
                       padding:
                           EdgeInsets.symmetric(vertical: 20, horizontal: 40),
@@ -195,9 +202,32 @@ class _BodyState extends State<Body> {
                     ),
                     onPressed: ()
                     {
-                      if (_formfield.currentState!.validate())
+                      if (_formfield.currentState!.validate())  // User Input data is valid
                       {
-                        // Email is valid, perform login logic
+                        //Firebase realtime database
+                        databaseReference.child(DateTime.now().millisecondsSinceEpoch.toString()).set({
+                          'id' : DateTime.now().millisecondsSinceEpoch.toString(),
+                          'Name' : nameController.text.toString(),
+                          'Email' : emailController.text.toString(),
+                          'Password' : PassController.text.toString()
+
+                        }).then((value)
+                        {
+                          Flushbar(
+                            message: 'User Details Saved',
+                            backgroundColor: Colors.green,
+                            duration: Duration(seconds: 3),
+                          )..show(context);
+                        }).onError((error, stackTrace)
+                        {
+                          Flushbar(
+                            message: 'Error Saving Data: $error',
+                            backgroundColor: Colors.red,
+                            duration: Duration(seconds: 3),
+                          )..show(context);
+                        });
+
+                        //Firebase Authentication
                         FirebaseAuth.instance.createUserWithEmailAndPassword(
                             email: emailController.text, password: PassController.text).then((value)
                             {
@@ -234,11 +264,16 @@ class _BodyState extends State<Body> {
                         });
                         print("Success");
                       }
+                      //loading functionality pending
+                      /*setState(() {
+                        isLoading = true;
+                      });*/
                     },
                     child: const Text(
                       "SIGN UP",
                       style: TextStyle(color: Colors.white),
                     ),
+
                   ),
                 ),
               ),

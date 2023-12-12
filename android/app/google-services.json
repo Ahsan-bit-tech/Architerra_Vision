@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "60836803963",
+    "firebase_url": "https://architerravisions-fyp-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "architerravisions-fyp",
     "storage_bucket": "architerravisions-fyp.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.flutter_login"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "60836803963-frlpcgo0kj8oans60hi1a01rn4656gae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_login",
+            "certificate_hash": "db39cc4758412952977fcc17d6bfd964400b1800"
+          }
+        },
+        {
+          "client_id": "60836803963-9mor0qjbb6tqdp5j5rqqbeph51ilenii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDL9TM8z0vmXZIbP9-qDjMTakgQBPBJiI4"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60836803963-9mor0qjbb6tqdp5j5rqqbeph51ilenii.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
