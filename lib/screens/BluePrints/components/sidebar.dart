@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:rive/rive.dart';
-// import 'package:rive/rive.dart';
-import 'package:flutter_login/constants.dart';
-import 'package:flutter_login/screens/welcome/welcome_screen.dart';
-import 'package:flutter_login/screens/helpus/background.dart';
 import 'package:flutter_login/screens/contactus/components/body.dart';
+// import 'package:rive/rive.dart';
+// import 'package:rive/rive.dart';
+//import 'package:flutter_login/constants.dart';
+import 'package:flutter_login/screens/welcome/welcome_screen.dart';
+//import 'package:flutter_login/screens/helpus/background.dart';
+//import 'package:flutter_login/screens/contactus/components/body.dart';
 // import 'package:flutter_login/screens/about us/background.dart';
 import 'package:flutter_login/screens/about us/components/body.dart';
 import 'package:flutter_login/screens/UserProfile/body.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({super.key});
@@ -81,7 +83,9 @@ class _SideMenuState extends State<SideMenu> {
             buildMenuItem(
                 "About Us", "images/aboutUs.png", const aboutUsPage()),
             buildMenuItem(
-                "Contanct Us", "images/feedback.png", const ContactForm()),
+                "Contanct Us", "images/feedback.png", const ContactForm(),
+                url:
+                    "https://docs.google.com/forms/d/e/1FAIpQLSdIsrbelJrX6up_RSvkkuL_7WkISArcXNieVwkdudqjD3FI4Q/viewform?usp=sf_link"),
 
             // buildMenuItem("AnotherItem", "images/Logo.png"),
             // buildMenuItem("Help", "images/Logo.png")
@@ -91,7 +95,8 @@ class _SideMenuState extends State<SideMenu> {
     );
   }
 
-  Widget buildMenuItem(String title, String imagePath, Widget destination) {
+  Widget buildMenuItem(String title, String imagePath, Widget destination,
+      {String? url}) {
     return Column(
       children: [
         Padding(
@@ -102,11 +107,16 @@ class _SideMenuState extends State<SideMenu> {
             // Update the active state for the pressed menu item
             setState(() {
               activeItem = title;
+              print('Contact Us button tapped');
             });
-            Future.delayed(Duration(milliseconds: 550), () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => destination));
-            });
+            if (url != null) {
+              _launchurl();
+            } else {
+              Future.delayed(Duration(milliseconds: 550), () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => destination));
+              });
+            }
           },
           child: TweenAnimationBuilder<Color?>(
             tween: ColorTween(
@@ -148,5 +158,27 @@ class _SideMenuState extends State<SideMenu> {
         ),
       ],
     );
+  }
+
+/*
+  void launchURL(String url) async {
+    if (await canLaunch(url)) {
+      Uri uri = Uri.parse(url);
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+}
+*/
+
+  _launchurl() async {
+    const url =
+        "https://docs.google.com/forms/d/e/1FAIpQLSdIsrbelJrX6up_RSvkkuL_7WkISArcXNieVwkdudqjD3FI4Q/viewform?usp=sf_link";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw "could not launch the url";
+    }
   }
 }

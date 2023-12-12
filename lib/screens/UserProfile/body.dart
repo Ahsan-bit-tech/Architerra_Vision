@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/screens/welcome/welcome_screen.dart';
 
 void main() {
   runApp(User_profile());
@@ -181,7 +182,10 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 // Add your logout logic here
                 // For now, let's just navigate to the login page
                 Navigator.pop(context); // Close the user profile page
-
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => WelcomeScreen()),
+                );
                 // Show "Logged Out" message
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
